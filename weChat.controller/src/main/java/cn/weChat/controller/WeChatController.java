@@ -57,7 +57,7 @@ public class WeChatController {
         button1.setUrl("https://www.baidu.com/");
         ViewButton button2=new ViewButton();
         button2.setName("ViewButton2");
-        button2.setType("view");
+        button2.setType("view1cao");
         button2.setUrl("https://www.baidu.com/");
         menu.setButtons(new Button[]{button1,button2});
         String jsonString = JSONObject.toJSONString(menu);

@@ -164,7 +164,7 @@
       </MavenGeneralSettings>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="542" />
     <option name="y" value="17" />
     <option name="width" value="1400" />
@@ -404,7 +404,7 @@
     <property name="RequestMappingsPanelWidth2" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1568548288706" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1568548919073" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -476,7 +476,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1568535936512</updated>
-      <workItem from="1568535944941" duration="11768000" />
+      <workItem from="1568535944941" duration="12434000" />
     </task>
     <task id="LOCAL-00001" summary="tj">
       <created>1568547053621</created>
@@ -496,7 +496,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11768000" />
+    <option name="totallyTimeSpent" value="12434000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />

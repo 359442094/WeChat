@@ -15,7 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-@Api(tags = {"微信服务器"})
+
+@Api(tags = {"开发微信服务器"})
 @Log4j
 @Controller
 public class WeChatController {
@@ -35,8 +36,10 @@ public class WeChatController {
             log.info("=======请求校验成功======" + echostr);
             out.print(echostr);
         }
-        out.close();
-        out = null;
+        if(out != null){
+            out.close();
+            out = null;
+        }
     }
 
     @ApiOperation(value = "获取token",notes = "获取token")

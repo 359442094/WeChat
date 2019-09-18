@@ -8,10 +8,18 @@
         <version>1.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>weChat.common</groupId>
     <artifactId>cn.weChat.common</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>weChat.model</groupId>
+            <artifactId>cn.weChat.model</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 
 </project>

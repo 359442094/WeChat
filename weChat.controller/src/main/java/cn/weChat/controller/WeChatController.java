@@ -50,7 +50,7 @@ public class WeChatController {
     }
 
     @ApiOperation(value = "初始化菜单",notes = "初始化菜单")
-    @RequestMapping(path = "/weChat/createMenu",method = RequestMethod.POST)
+    @RequestMapping(path = "/weChat/menu",method = RequestMethod.POST)
     public int createMenu() throws Exception {
         String accessToken=WeChatUtil.getToken();
         Menu menu=new Menu();

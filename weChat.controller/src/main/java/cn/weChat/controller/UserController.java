@@ -1,6 +1,8 @@
 package cn.weChat.controller;
 
 import cn.weChat.common.ServiceException;
+import cn.weChat.common.annoation.ShowLogger;
+import cn.weChat.common.constant.ErrorConstant;
 import cn.weChat.common.constant.ServiceConstant;
 import cn.weChat.common.dto.UserLoginRequest;
 import cn.weChat.common.dto.UserLoginResponse;
@@ -26,16 +28,17 @@ public class UserController {
     @Autowired
     private RedisUtil redisUtil;
 
-    @ApiOperation(value = "登录",notes = "登录")
+    @ShowLogger(info = "用户登录")
+    @ApiOperation(value = "用户登录",notes = "用户登录")
     @RequestMapping(path = "/user/login",method = RequestMethod.POST)
     @ResponseBody
     public UserLoginResponse login(UserLoginRequest request){
         if(StringUtils.isEmpty(request)){
-            throw new ServiceException("C00001","登录参数为空");
+            throw new ServiceException(ErrorConstant.ERROR_PARAM,"登录参数为空");
         }else if(StringUtils.isEmpty(request.getUsername())){
-            throw new ServiceException("C00001","登录用户参数为空");
+            throw new ServiceException(ErrorConstant.ERROR_PARAM,"登录用户参数为空");
         }else if(StringUtils.isEmpty(request.getPassword())){
-            throw new ServiceException("C00001","登录密码参数为空");
+            throw new ServiceException(ErrorConstant.ERROR_PARAM,"登录密码参数为空");
         }else{
             UserExample userExample=new UserExample();
             userExample.createCriteria()

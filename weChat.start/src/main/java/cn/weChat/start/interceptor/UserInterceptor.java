@@ -1,6 +1,7 @@
 package cn.weChat.start.interceptor;
 
 import cn.weChat.common.ServiceException;
+import cn.weChat.common.constant.ErrorConstant;
 import cn.weChat.common.constant.ServiceConstant;
 import cn.weChat.common.util.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class UserInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
         if(StringUtils.isEmpty(redisUtil.get(ServiceConstant.SERVICE_SESSION))){
-            throw new ServiceException("C00002","请重新登录");
+            throw new ServiceException(ErrorConstant.ERROR_LOGIN_TIMEOUT,"请重新登录");
         }
         return true;
     }

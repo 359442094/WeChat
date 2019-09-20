@@ -1,5 +1,7 @@
 package cn.weChat.common.util;
 
+import cn.weChat.common.ServiceException;
+import cn.weChat.common.constant.ErrorConstant;
 import cn.weChat.common.constant.ServiceConstant;
 import cn.weChat.model.entity.User;
 import cn.weChat.model.entity.UserExample;
@@ -33,7 +35,11 @@ public class Context {
     public static void initUser(){
         if(!StringUtils.isEmpty(context.redisUtil.get(ServiceConstant.SERVICE_SESSION))){
             String sessionId = context.redisUtil.get(ServiceConstant.SERVICE_SESSION).toString();
-            String[] split = AESUtil.decryptStart(sessionId).split("&");
+            String sId = AESUtil.decryptStart(sessionId);
+            if(sId.indexOf("&")<=-1){
+                throw new ServiceException(ErrorConstant.ERROR_SESSION,"非法的sessionId");
+            }
+            String[] split = sId.split("&");
             String userName = split[0];
             String password = split[1];
             UserExample userExample=new UserExample();

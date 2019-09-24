@@ -9,11 +9,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @ComponentScan(basePackages = {
         "cn.weChat.controller",
         "cn.weChat.common",
-        "cn.weChat.model",
         "cn.weChat.start"
-})
-@MapperScan(basePackages = {
-        "cn.weChat.model.mapper"
 })
 @SpringBootApplication
 @EnableSwagger2

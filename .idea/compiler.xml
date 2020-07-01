@@ -7,6 +7,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="cn.weChat.common" />
+        <module name="cn.weChat.controller" />
+        <module name="cn.weChat.model" />
+        <module name="cn.weChat.start" />
         <module name="weChat.common" />
         <module name="weChat.controller" />
         <module name="weChat.model" />

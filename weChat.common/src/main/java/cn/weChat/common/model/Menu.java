@@ -8,6 +8,6 @@ import lombok.ToString;
 @ToString
 public class Menu {
 
-    private Button[] buttons;
+    private Button[] button;
 
 }

@@ -1,6 +1,7 @@
 package cn.weChat.common.util;
 
 import com.alibaba.fastjson.JSONObject;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -17,11 +18,11 @@ import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
+@Slf4j
 public class WeChatUtil {
 
     @Autowired
@@ -55,12 +56,13 @@ public class WeChatUtil {
         params.add(timestamp);
         params.add(nonce);
         // 1. 将token、timestamp、nonce三个参数进行字典序排序
-        Collections.sort(params, new Comparator<String>() {
+        /*Collections.sort(params, new Comparator<String>() {
             @Override
             public int compare(String o1, String o2) {
                 return o1.compareTo(o2);
             }
-        });
+        });*/
+        params =   params.stream().sorted().collect(Collectors.toList());
         // 2.将三个参数字符串拼接成一个字符串进行sha1加密
         String temp = SHAUtil.encode(params.get(0) + params.get(1) + params.get(2));
         // 3. 将sha1加密后的字符串可与signature对比，标识该请求来源于微信
@@ -110,30 +112,28 @@ public class WeChatUtil {
         return jsonObject;
     }
 
-    public static String getToken() throws IOException, ParseException {
+    public static JSONObject getToken() throws IOException, ParseException {
         String url = weChatUtil.getToken.replace("APPID", weChatUtil.appId).replace("APPSECRET", weChatUtil.appsecret);
         JSONObject jsonObject = weChatUtil.doGetStr(url);
+        log.info("getToken json:"+jsonObject);
         if(jsonObject != null){
             Object access_token = jsonObject.get("access_token");
             if(!StringUtils.isEmpty(access_token)){
                 System.out.println("获取token:"+access_token.toString());
-                return access_token.toString();
+                //return access_token.toString();
             }
         }
-        return null;
+        return jsonObject;
     }
 
-    public static int createMenu(String token,String jsonStr) {
+    public static JSONObject createMenu(String token,String jsonStr) {
         String url = weChatUtil.createMenu.replace("ACCESS_TOKEN",token);
         JSONObject jsonObject = weChatUtil.doPostStr(url,jsonStr);
+        log.info("createMenu json:"+jsonObject);
         if(jsonObject != null){
             Object errcode = jsonObject.get("errcode");
-            if(!StringUtils.isEmpty(errcode)){
-                System.out.println("创建菜单"+Integer.parseInt(errcode.toString()));
-                return Integer.parseInt(errcode.toString());
-            }
         }
-        return 100;
+        return jsonObject;
     }
 
 }

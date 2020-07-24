@@ -33,11 +33,16 @@ public class WeChatController {
     @RequestMapping(path = "/weChat/signature",method = RequestMethod.GET)
     public void signature(HttpServletRequest request, HttpServletResponse response) throws IOException {
         //消息来源可靠性验证
-        String signature = request.getParameter("signature");// 微信加密签名
-        String timestamp = request.getParameter("timestamp");// 时间戳
-        String nonce = request.getParameter("nonce");       // 随机数
-        String echostr = request.getParameter("echostr");//成为开发者验证
-        //确认此次GET请求来自微信服务器，原样返回echostr参数内容，则接入生效，成为开发者成功，否则接入失败
+        // 微信加密签名
+        String signature = request.getParameter("signature");
+        // 时间戳
+        String timestamp = request.getParameter("timestamp");
+        // 随机数
+        String nonce = request.getParameter("nonce");
+        //成为开发者验证
+        String echostr = request.getParameter("echostr");
+        //确认此次GET请求来自微信服务器，原样返回echostr参数内容，
+        //则接入生效，成为开发者成功，否则接入失败
         PrintWriter out = response.getWriter();
         if(WeChatUtil.checkSignature(signature, timestamp, nonce)){
             log.info("=======请求校验成功======" + echostr);

@@ -8,7 +8,7 @@
         <sqlMapGenerator targetPackage="mappers" targetProject="src/main/resources" />
         <javaClientGenerator targetPackage="cn.weChat.model.mapper" targetProject="src/main/java" type="XMLMAPPER" />
 
-        <table tableName="test"></table>
+        <!--<table tableName="test"></table>-->
 
     </context>
 </generatorConfiguration>

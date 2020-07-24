@@ -55,13 +55,6 @@ public class WeChatUtil {
         params.add(weChatUtil.token);
         params.add(timestamp);
         params.add(nonce);
-        // 1. 将token、timestamp、nonce三个参数进行字典序排序
-        /*Collections.sort(params, new Comparator<String>() {
-            @Override
-            public int compare(String o1, String o2) {
-                return o1.compareTo(o2);
-            }
-        });*/
         params =   params.stream().sorted().collect(Collectors.toList());
         // 2.将三个参数字符串拼接成一个字符串进行sha1加密
         String temp = SHAUtil.encode(params.get(0) + params.get(1) + params.get(2));

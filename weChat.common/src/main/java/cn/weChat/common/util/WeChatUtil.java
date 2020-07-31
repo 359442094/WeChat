@@ -55,7 +55,7 @@ public class WeChatUtil {
         params.add(weChatUtil.token);
         params.add(timestamp);
         params.add(nonce);
-        params =   params.stream().sorted().collect(Collectors.toList());
+        params = params.stream().sorted().collect(Collectors.<String>toList());
         // 2.将三个参数字符串拼接成一个字符串进行sha1加密
         String temp = SHAUtil.encode(params.get(0) + params.get(1) + params.get(2));
         // 3. 将sha1加密后的字符串可与signature对比，标识该请求来源于微信

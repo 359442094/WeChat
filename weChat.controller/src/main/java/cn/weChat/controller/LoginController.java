@@ -22,7 +22,7 @@ import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
 
-@Api(tags = {"开发微信服务器"})
+@Api(tags = {"微信相关接口"})
 @Slf4j
 @Controller
 public class LoginController {
@@ -38,10 +38,10 @@ public class LoginController {
     //http://cj.ngrok2.xiaomiqiu.cn/login
     @RequestMapping(path = "/login",method = RequestMethod.GET)
     public void login(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String backUrl = "http://cj.ngrok2.xiaomiqiu.cn/loginCallBack";
+        String callBackUrl = "http://cj.ngrok2.xiaomiqiu.cn/loginCallBack";
         String url = "https://open.weixin.qq.com/connect/oauth2/authorize?"
                 +"appid=" + appId
-                +"&redirect_uri="+ URLEncoder.encode(backUrl,"UTF-8")
+                +"&redirect_uri="+ URLEncoder.encode(callBackUrl,"UTF-8")
                 +"&response_type=code"
                 +"&scope=snsapi_userinfo"
                 //+"&scope=snsapi_base"

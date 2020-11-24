@@ -1,5 +1,6 @@
 package cn.weChat.controller;
 
+import cn.weChat.common.annoation.ShowLogger;
 import cn.weChat.common.model.Button;
 import cn.weChat.common.model.ClickButton;
 import cn.weChat.common.model.Menu;
@@ -29,6 +30,7 @@ public class WeChatController {
      * 微信公众号-服务器地址(URL)配置这个方法的访问地址
      * 开发者接入验证 确认请求来自微信服务器
      * */
+    @ShowLogger(info = "验证请求")
     @ApiOperation(value = "验证请求",notes = "验证请求")
     @RequestMapping(path = "/weChat/signature",method = RequestMethod.GET)
     public void signature(HttpServletRequest request, HttpServletResponse response) throws IOException {

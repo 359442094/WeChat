@@ -11,17 +11,15 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.log4j.Log4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
 
-@Api(tags = {"开发微信服务器"})
+@Api(tags = {"微信相关接口"})
 @Log4j
 @Controller
 public class WeChatController {
@@ -59,7 +57,7 @@ public class WeChatController {
     @ApiOperation(value = "获取token",notes = "获取token")
     @RequestMapping(path = "/weChat/getToken",method = RequestMethod.GET)
     @ResponseBody
-    public JSONObject getToken() throws Exception {
+    public String getToken() throws Exception {
         // TODO 消息的接收、处理、响应
        return WeChatUtil.getToken();
     }
@@ -68,7 +66,7 @@ public class WeChatController {
     @RequestMapping(path = "/weChat/menu",method = RequestMethod.POST)
     @ResponseBody
     public JSONObject createMenu() throws Exception {
-        JSONObject token = WeChatUtil.getToken();
+        String token = WeChatUtil.getToken();
         Menu menu=new Menu();
         ViewButton leftButton=new ViewButton();
         leftButton.setType("view");
@@ -92,7 +90,35 @@ public class WeChatController {
 
         System.out.println("json:"+json);
 
-        return WeChatUtil.createMenu(token.getString("access_token")+"", json);
+        return WeChatUtil.createMenu(token, json);
+    }
+
+    @ApiOperation(value = "发送模板消息",notes = "初始化菜单")
+    @RequestMapping(path = "/weChat/sendTemplateData",method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject sendTemplateData() throws IOException, ParseException {
+        String token = WeChatUtil.getToken();
+        String url = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token="+token;
+        String json = "{\n" +
+                "\n" +
+                "\t\"touser\": \"oVDCL0pqQABo7Kpberhs4s2fvlpk\",\n" +
+                "\t\"template_id\": \"omGxYtt-GSnl6G1iMIV-USORKRYTA1e-JiwBruuEbEg\",\n" +
+                "\t\"url\": \"www.baidu.com\",\n" +
+                "\t\"topcolor\": \"#FF0000\",\n" +
+                "\t\"data\": {\n" +
+                "\t\t\"first\": {\n" +
+                "\t\t\t\"value\": \"data1\",\n" +
+                "\t\t\t\"color\": \"#173177\"\n" +
+                "\t\t},\n" +
+                "\t\t\"keyword1\": {\n" +
+                "\t\t\t\"value\": \"data2\",\n" +
+                "\t\t\t\"color\": \"#173177\"\n" +
+                "\t\t}\n" +
+                "\t}\n" +
+                "}";
+        JSONObject jsonObject = WeChatUtil.doPostStr(url, json);
+        System.out.println("jsonObject:"+jsonObject);
+        return jsonObject;
     }
 
 }

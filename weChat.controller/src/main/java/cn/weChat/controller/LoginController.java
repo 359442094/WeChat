@@ -22,7 +22,7 @@ import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
 
-@Api(tags = {"微信相关接口"})
+@Api(tags = {"微信登录接口"})
 @Slf4j
 @Controller
 public class LoginController {

@@ -109,7 +109,7 @@ public class WeChatUtil {
         return jsonObject;
     }
 
-    public static JSONObject getToken() throws IOException, ParseException {
+    public static String getToken() throws IOException, ParseException {
         String url = weChatUtil.getToken.replace("APPID", weChatUtil.appId).replace("APPSECRET", weChatUtil.appsecret);
         JSONObject jsonObject = weChatUtil.doGetStr(url);
         log.info("getToken json:"+jsonObject);
@@ -117,10 +117,10 @@ public class WeChatUtil {
             Object access_token = jsonObject.get("access_token");
             if(!StringUtils.isEmpty(access_token)){
                 System.out.println("获取token:"+access_token.toString());
-                //return access_token.toString();
+                return access_token.toString();
             }
         }
-        return jsonObject;
+        return null;
     }
 
     public static JSONObject createMenu(String token,String jsonStr) {
